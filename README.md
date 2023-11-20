@@ -1,73 +1,36 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Repaso de lo que se estuvo aprendiendo con nest
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Se debe instalar graphql, typeOrm, la base de datos que usaremos en este caso postgres, entre otras librerias propias de @nestjs/common
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+http://localhost:3000 	
+http://localhost:3000/graphql  para poder utilizar el graphql de nuestro backend
 
-## Description
+app.controller.ts: 
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+utilizamos como decorador el tipo de peticion @Get y @Post
+una vez puesto el decorador si es get o post , etc 
+creamos una funcion en este caso de tipo string 
+y luego devolvemos el appService y la funcion especifica
 
-## Installation
+Carpeta ./src/user tendremos
 
-```bash
-$ npm install
-```
+Module:
+le definimos los componentes y servicios que se va a utilizar en toda la aplicacion
+tambien importamos modulos de terceros los cuales son graphQLModule y TypeOrmModule
+tambien hacemos la conexion a la base de datos en este caso con TypeOrm.
 
-## Running the app
+Service: 
+la parte mas baja, donde utilizamos las querys de typeORM para colocarla dentro de funciones y luego exportar la clase service con todas sus funciones para luego llamarlas.
 
-```bash
-# development
-$ npm run start
 
-# watch mode
-$ npm run start:dev
+Resolver: 
+Esto es para utilizar graphql, declaramos que tipo de query graphql sera y luego creamos la funcion que hace un llamado por el dto y luego devuelve la funcion del service.
 
-# production mode
-$ npm run start:prod
-```
+Entity:
+crea las entidades de la base de datos aqui en el entity como una clase la cual sera una entidad, basicamente es como crear la tabla de la base de datos pero en typescript
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Dto:
+LO QUE EL CLIENTE ESTA INSERTANDO (LAS REQUEST CONCRETAS QUE QUIERO PARA UNA FUNCION ESPECIFICA)
+son clases en las cuales se especifica los datos exactos que vamos a usar, en este caso una clase para el registro de usuario, dentro de la clase le ingresamos el alias y password que son los campos especificos que el usuario va a insertar para el registro.
+En el archivo service entre () se aclara que en este caso user : nombre de la clase dto se esta especificando en esa funcion del service que al importar ese dto usaremos esos datos especificos que tiene ese dto.
