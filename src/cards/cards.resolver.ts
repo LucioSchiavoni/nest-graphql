@@ -9,7 +9,7 @@ export class CardsResolver {
   constructor(private readonly cardsService: CardsService) {}
 
   @Mutation(() => Card)
-  createCard(@Args('createCardInput') createCardInput: CreateCardInput) {
+  createCard(@Args('create') createCardInput: CreateCardInput) {
     return this.cardsService.create(createCardInput);
   }
 
@@ -23,13 +23,13 @@ export class CardsResolver {
     return this.cardsService.findOne(id);
   }
 
-  @Mutation(() => Card)
-  updateCard(@Args('updateCardInput') updateCardInput: UpdateCardInput) {
-    return this.cardsService.update(updateCardInput.id, updateCardInput);
-  }
+  // @Mutation(() => Card)
+  // updateCard(@Args('updateCardInput') updateCardInput: UpdateCardInput) {
+  //   return this.cardsService.update(updateCardInput.id, updateCardInput);
+  // }
 
-  @Mutation(() => Card)
-  removeCard(@Args('id', { type: () => Int }) id: number) {
-    return this.cardsService.remove(id);
-  }
+  // @Mutation(() => Card)
+  // removeCard(@Args('id', { type: () => Int }) id: number) {
+  //   return this.cardsService.remove(id);
+  // }
 }

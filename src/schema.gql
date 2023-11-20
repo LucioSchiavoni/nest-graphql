@@ -14,8 +14,10 @@ type Win {
 }
 
 type Card {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int!
+  name: String!
+  description: String!
+  points: String!
 }
 
 type Query {
@@ -31,9 +33,7 @@ type Mutation {
   createWin(createWinInput: CreateWinInput!): Win!
   updateWin(updateWinInput: UpdateWinInput!): Win!
   removeWin(id: Int!): Win!
-  createCard(createCardInput: CreateCardInput!): Card!
-  updateCard(updateCardInput: UpdateCardInput!): Card!
-  removeCard(id: Int!): Card!
+  createCard(create: CreateCardInput!): Card!
 }
 
 input CreateUserInput {
@@ -53,12 +53,7 @@ input UpdateWinInput {
 }
 
 input CreateCardInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateCardInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  name: String!
+  description: String!
+  points: String!
 }
