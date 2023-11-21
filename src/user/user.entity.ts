@@ -15,4 +15,6 @@ export class User {
     @Column()
     @Field()
     password: string;
+
+    
 }

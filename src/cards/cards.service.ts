@@ -20,8 +20,12 @@ export class CardsService {
     return this.cardRepository.find()
   }
 
-  async findOne(id): Promise<Card[]> {
-    return this.cardRepository.findBy(id);
+  async findOne(id: number): Promise<Card> {
+    return this.cardRepository.findOne({
+      where: {
+        id,
+      }
+    });
   }
 
   // update(id: number, updateCardInput: UpdateCardInput) {

@@ -9,8 +9,10 @@ type User {
 }
 
 type Win {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  id: Int!
+  result: String!
+  oponent: String!
+  type: String!
 }
 
 type Card {
@@ -22,18 +24,18 @@ type Card {
 
 type Query {
   AllUser: [User!]!
-  wins: [Win!]!
-  win(id: Int!): Win!
   cards: [Card!]!
   card(id: Int!): Card!
+  wins: [Win!]!
+  win(id: Int!): Win!
 }
 
 type Mutation {
   createUser(userInput: CreateUserInput!): User!
+  createCard(create: CreateCardInput!): Card!
   createWin(createWinInput: CreateWinInput!): Win!
   updateWin(updateWinInput: UpdateWinInput!): Win!
   removeWin(id: Int!): Win!
-  createCard(create: CreateCardInput!): Card!
 }
 
 input CreateUserInput {
@@ -41,19 +43,21 @@ input CreateUserInput {
   password: String!
 }
 
-input CreateWinInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
-input UpdateWinInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
-
 input CreateCardInput {
   name: String!
   description: String!
-  points: String!
+  points: String
+}
+
+input CreateWinInput {
+  wins: String!
+  oponent: String!
+  type: String
+}
+
+input UpdateWinInput {
+  wins: String
+  oponent: String
+  type: String
+  id: Int!
 }

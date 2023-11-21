@@ -1,15 +1,22 @@
 import { Injectable } from '@nestjs/common';
 import { CreateWinInput } from './dto/create-win.input';
 import { UpdateWinInput } from './dto/update-win.input';
+import { Win } from './entities/win.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class WinsService {
-  create(createWinInput: CreateWinInput) {
-    return 'This action adds a new win';
+
+  constructor(@InjectRepository(Win) private winRepository: Repository<Win>) {}
+
+  async create(win: CreateWinInput): Promise<Win> {
+      const newWin = this.winRepository.create(win)
+      return this.winRepository.save(newWin)
   }
 
-  findAll() {
-    return `This action returns all wins`;
+  async findAll(): Promise<Win[]> {
+    return this.winRepository.find()
   }
 
   findOne(id: number) {

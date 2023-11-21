@@ -7,7 +7,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export class Card {
 
   @PrimaryGeneratedColumn()
-    @Field(() => Int)
+    @Field((type) => Int)
     id: number;
 
     @Column()

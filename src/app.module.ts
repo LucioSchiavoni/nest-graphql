@@ -11,6 +11,12 @@ import { join } from 'path';
 import { WinsModule } from './wins/wins.module';
 import { CardsModule } from './cards/cards.module';
 import { User } from './user/user.entity';
+import { CardsResolver } from './cards/cards.resolver';
+import { CardsService } from './cards/cards.service';
+import { WinsResolver } from './wins/wins.resolver';
+import { WinsService } from './wins/wins.service';
+import { Card } from './cards/entities/card.entity';
+import { Win } from './wins/entities/win.entity';
 
 
 
@@ -30,13 +36,14 @@ import { User } from './user/user.entity';
       database: 'mydb', 
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-    }),TypeOrmModule.forFeature([User]),
+    }),TypeOrmModule.forFeature([User, Card, Win]),
+   
      UserModule,
      WinsModule,
      CardsModule,
      
   ],
   controllers: [AppController],
-  providers: [AppService, UserResolver, UserService],
+  providers: [AppService, UserResolver, UserService, CardsResolver, CardsService, WinsResolver, WinsService],
 })
 export class AppModule {}
