@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from "@nestjs/graphql"
-import {Entity, Column, PrimaryGeneratedColumn} from 'typeorm';
+import { Win } from "src/wins/entities/win.entity";
+import {Entity, Column, PrimaryGeneratedColumn, OneToMany} from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -16,5 +17,7 @@ export class User {
     @Field()
     password: string;
 
-    
+    @OneToMany(() => Win, (win) => win.user)
+    @Field(() => [Win], {nullable: true})
+    wins: Win[];
 }

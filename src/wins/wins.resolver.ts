@@ -1,8 +1,9 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
 import { WinsService } from './wins.service';
 import { Win } from './entities/win.entity';
 import { CreateWinInput } from './dto/create-win.input';
 import { UpdateWinInput } from './dto/update-win.input';
+import { User } from 'src/user/user.entity';
 
 @Resolver(() => Win)
 export class WinsResolver {
@@ -16,6 +17,11 @@ export class WinsResolver {
   @Query(() => [Win], { name: 'wins' })
   findAll() {
     return this.winsService.findAll();
+  }
+
+  @ResolveField( (returns) => User)
+  user(@Parent() win: Win): Promise<User>{
+    return this.winsService.getUser(win.userId)
   }
 
   @Query(() => Win, { name: 'win' })

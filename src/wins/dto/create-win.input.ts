@@ -1,12 +1,12 @@
 import { InputType, Int, Field } from '@nestjs/graphql';
-import { IsNotEmpty } from "class-validator"
+import { IsInt, IsNotEmpty } from "class-validator"
 
 @InputType()
 export class CreateWinInput {
 
   @Field()
   @IsNotEmpty({ message: 'Campo obligatorio'})
-  wins: string;
+  result: string;
 
   @IsNotEmpty({ message: 'Campo obligatorio'})
   @Field()
@@ -14,4 +14,8 @@ export class CreateWinInput {
 
   @Field({nullable: true})
   type?:string;
+
+  @IsInt()
+  @Field()
+  userId: number;
 }

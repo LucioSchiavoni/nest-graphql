@@ -2,17 +2,20 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
-  id: Int!
-  alias: String!
-  password: String!
-}
-
 type Win {
   id: Int!
   result: String!
   oponent: String!
   type: String!
+  userId: Int!
+  user: User!
+}
+
+type User {
+  id: Int!
+  alias: String!
+  password: String!
+  wins: [Win!]
 }
 
 type Card {
@@ -24,6 +27,7 @@ type Card {
 
 type Query {
   AllUser: [User!]!
+  user(id: Int!): User!
   cards: [Card!]!
   card(id: Int!): Card!
   wins: [Win!]!
@@ -50,14 +54,16 @@ input CreateCardInput {
 }
 
 input CreateWinInput {
-  wins: String!
+  result: String!
   oponent: String!
   type: String
+  userId: Float!
 }
 
 input UpdateWinInput {
-  wins: String
+  result: String
   oponent: String
   type: String
+  userId: Float
   id: Int!
 }
