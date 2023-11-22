@@ -17,8 +17,9 @@ import { WinsResolver } from './wins/wins.resolver';
 import { WinsService } from './wins/wins.service';
 import { Card } from './cards/entities/card.entity';
 import { Win } from './wins/entities/win.entity';
+import * as dotenv from 'dotenv';
 
-
+dotenv.config()
 
 @Module({
   imports: [
@@ -29,11 +30,11 @@ import { Win } from './wins/entities/win.entity';
     }),
     TypeOrmModule.forRoot({
       type:'postgres',
-      host: '127.0.0.1',
-      port : 5432,
-      username: 'user',
-      password: 'root123',
-      database: 'mydb', 
+      host: process.env.DB_HOST,
+      port : parseInt(process.env.DB_PORT, 10),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE, 
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),TypeOrmModule.forFeature([User, Card, Win]),
