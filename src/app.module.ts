@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module,  NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {TypeOrmModule} from '@nestjs/typeorm';
@@ -20,12 +20,12 @@ import { Win } from './wins/entities/win.entity';
 
 
 
-
 @Module({
   imports: [
      GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      
     }),
     TypeOrmModule.forRoot({
       type:'postgres',
@@ -46,4 +46,5 @@ import { Win } from './wins/entities/win.entity';
   controllers: [AppController],
   providers: [AppService, UserResolver, UserService, CardsResolver, CardsService, WinsResolver, WinsService],
 })
-export class AppModule {}
+export class AppModule{}
+
